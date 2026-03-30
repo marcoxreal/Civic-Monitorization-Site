@@ -1,0 +1,110 @@
+/*  Variabile CSS si stiluri de baza */
+:root {
+    --main-blue: #2980b9;
+    --bg-light: #f5f6fa;
+    --text-dark: #2f3640;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Meniu de baza (Orizontal pt Desktop) */
+.main-nav {
+    background-color: var(--main-blue);
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.nav-link {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* MEDIA QUERY - TABLETA */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        gap: 15px;
+    }
+
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 widgets pe rand pe tableta */
+    }
+}
+
+/*  MEDIA QUERY - MOBIL (max-width: 600px) */
+@media (max-width: 600px) {
+    /* Prevenim zoom-ul si fortam asezarea pe verticala */
+    .main-nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* TABELUL */
+    table {
+        display: block;       /* transforma tabelul intr-un bloc care poate avea scroll */
+        width: 100%;
+        overflow-x: auto;    /* activeaza scroll-ul orizontal */
+        white-space: nowrap; /* impiedica textul sa se rupa pe mai multe randuri, fortam latimea */
+        border: 1px solid #ccc;
+    }
+
+    /*  ajustam tabelele imbricate sa nu se deformeze */
+    td table {
+        display: inline-table; /* mentine tabelele mici din interior intacte */
+        width: auto;
+        margin: 5px;
+    }
+
+    /* facem textul din tabel sa nu fie inghesuit) */
+    th, td {
+        min-width: 120px;
+        padding: 10px;
+    }
+
+    h1 { font-size: 1.4rem; }
+}
+
+/* 5. Stilizare formular */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Pseudo-clase :focus si :disabled */
+input:focus, textarea:focus {
+    border-color: var(--main-blue);
+    outline: none;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+}
+
+input:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+}

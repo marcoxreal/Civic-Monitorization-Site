@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Civic Vote - Inregistrare Cetatean HTML5</title>
+</head>
+<body>
+
+<header>
+  <h1 align="center">Înregistrare Profil Cetățean (Versiunea HTML5)</h1>
+</header>
+
+<form action="#" method="post">
+  <fieldset>
+    <legend>Date Personale și Opinii</legend>
+
+    <p>
+      <strong>Nume complet:</strong><br>
+      <input type="text" name="nume" title="Introduceți numele complet așa cum apare în buletin" placeholder="Ex: Popescu Ion" required>
+    </p>
+
+    <p>
+      <strong>Vârsta (Exemplu atribut MAX):</strong><br>
+      <input type="number" name="varsta" min="18" max="120" value="18" step="1">
+    </p>
+
+    <p>
+      <b>Județul de reședință:</b><br>
+      <select name="judet">
+        <option value="CJ">Cluj</option>
+        <option value="DB" selected>Dâmbovița</option>
+        <option value="B">București</option>
+      </select>
+    </p>
+
+    <p>
+      <strong>Interese politice:</strong><br>
+      <input type="checkbox" name="interes" value="mediu" checked> Protecția Mediului
+    </p>
+
+    <p>
+      <strong>Poziție civică:</strong><br>
+      <textarea name="mesaj" rows="4" cols="50" maxlength="200" readonly>Acest text este doar pentru citire în varianta demonstrativă.</textarea>
+    </p>
+
+    <input type="submit" value="Salvează în HTML5">
+  </fieldset>
+</form>
+
+</body>
+</html>

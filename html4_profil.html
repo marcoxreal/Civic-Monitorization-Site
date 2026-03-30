@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ro">
+<head>
+  <title>Civic Vote - Profil</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<center><h1>Înscriere Cetățean ACTIV</h1></center>
+
+<form action="http://www.scs.ubbcluj.ro/~user/pw/lab1/post" method="post" name="formular_profil">
+  <fieldset>
+    <legend>Informații Cont</legend>
+    <p>
+      Nume Complet: <input type="text" name="nume" size="40" maxlength="30" value="">
+      <br><br>
+      Cod Siguranță (Read-only): <input type="text" name="id" value="ID-99" readonly="readonly" size="10">
+    </p>
+
+    <p>
+      Gen:
+      <input type="radio" name="sex" value="m" checked="checked"> Masculin
+      <input type="radio" name="sex" value="f"> Feminin
+      <input type="radio" name="sex" value="nb"> Non-Binar
+      <input type="radio" name="sex" value="a"> Altul
+    </p>
+
+    <p>
+      Doriți newsletter? <input type="checkbox" name="news" value="da"> Da
+      <br>
+      Acceptați GDPR? <input type="checkbox" name="gdpr" value="da" disabled="disabled"> (Indisponibil temporar)
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Preferințe Politice (Diacritice: ă, î, â, ș, ț)</legend>
+    <p>
+      Selectați județul:
+      <select name="judet">
+        <option value="CJ" selected="selected">Cluj-Napoca (Sediul Central)</option>
+        <option value="DB">Dâmbovița (Circumscripție)</option>
+        <option value="B">București</option>
+      </select>
+    </p>
+
+    <p>
+      Poziție Economică (Stânga -100 / Dreapta +100): <br>
+      <input type="number" name="economic" value="0" min="-100" max="100" step="10" size="5">
+    </p>
+
+    <p>
+      Poziție Socială (Libertarian -100 / Authoritarian +100): <br>
+      <input type="number" name="social" value="0" min="-100" max="100" step="10" size="5">
+    </p>
+
+    <p>
+      Interese multiple (folosiți CTRL): <br>
+      <select name="interese" size="5" multiple="multiple">
+        <option value="1">Educație și Școală</option>
+        <option value="2">Sănătate Publică</option>
+        <option value="3">Infrastructură Drumuri</option>
+        <option value="4">Păduri și Ape</option>
+        <option value="5">Cultură și Tradiții</option>
+      </select>
+    </p>
+
+    <p>
+      Vârsta: <input type="number" name="varsta" value="18" min="18" max="100" step="1">
+    </p>
+
+    <p>
+      Opinie civică (Textarea):<br>
+      <textarea name="opinie" cols="50" rows="4">Scrieți aici părerile...</textarea>
+    </p>
+  </fieldset>
+
+  <center>
+    <input type="submit" value="Trimite" title="Trimite Datele">
+    <input type="reset" value="Resetează">
+  </center>
+</form>
+
+<hr>
+<div align="left">
+  <p>Informații suplimentare în <b>subsol</b>.</p>
+  <p>Vizitați secțiunea de <i>ajutor</i> pentru detalii.</p>
+</div>
+
+<p align="right">
+  <a href="ihttps://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html4/index_html">Înapoi la pagina principală</a>
+</p>
+
+</body>
+</html>

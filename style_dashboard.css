@@ -1,0 +1,72 @@
+/* Variabile locale pentru dashboard */
+:root {
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+}
+
+/* Containerul principal folosind Flexbox */
+.dashboard-grid {
+    display: flex;
+    flex-wrap: wrap; /* permite trecerea pe randul urmator dacă nu e loc */
+    gap: 20px;       /* spatiu intre widget-uri */
+    margin-bottom: 40px;
+}
+
+/* Stilul comun pentru Widget-uri */
+.card {
+    flex: 1 1 calc(25% - 20px); /* ocupa aprox 25% din latime */
+    min-width: 200px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    border-top: 5px solid #ccc;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Culori specifice pentru widgets folosind selectori de clasa */
+.card-blue { border-top-color: #3498db; }
+.card-green { border-top-color: #2ecc71; }
+.card-orange { border-top-color: #f39c12; }
+.card-red { border-top-color: #e74c3c; }
+
+/* stil pentru tabelul de date */
+.table-container {
+    overflow-x: auto; /* permite scroll orizontal pe ecrane mici */
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+    background-color: #f8f9fa;
+    color: #333;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Civic Vote - Dashboard Monitorizare</title>
+  <link rel="stylesheet" href="style_vertical.css">
+  <link rel="stylesheet" href="style_dashboard.css">
+</head>
+<body>
+
+<nav class="main-nav">
+  <ul>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/index_html" class="nav-link">Acasă</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/dashboard_html" class="nav-link">Monitorizare (Dashboard)</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/profil_html" class="nav-link">Profil Cetățean</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/sprites_html" class="nav-link star-icon">Statistici (Sprites)</a></li>
+  </ul>
+</nav>
+
+<main>
+  <header>
+    <h1>Panou de Control - Monitorizare Proiecte</h1>
+    <p>Statistici în timp real privind activitatea legislativă.</p>
+  </header>
+
+  <section class="dashboard-grid">
+    <div class="card card-blue">
+      <h3>Proiecte Active</h3>
+      <p class="stat-number">124</p>
+      <p>+5 în ultima săptămână</p>
+    </div>
+
+    <div class="card card-green">
+      <h3>Voturi Exprimate</h3>
+      <p class="stat-number">8,420</p>
+      <p>Rata de participare: 68%</p>
+    </div>
+
+    <div class="card card-orange">
+      <h3>Urgențe</h3>
+      <p class="stat-number">12</p>
+      <p>Necesită atenție imediată</p>
+    </div>
+
+    <div class="card card-red">
+      <h3>Termene Limită</h3>
+      <p class="stat-number">3</p>
+      <p>Expiră în 24 de ore</p>
+    </div>
+  </section>
+
+  <section class="table-section">
+    <h2>Detaliu Proiecte pe Județe</h2>
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Județ</th>
+          <th>Inițiator</th>
+          <th>Categorie</th>
+          <th>Data Publicării</th>
+          <th>Status Curent</th>
+          <th>Impact Estimat</th>
+          <th>Acțiuni</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>#001</td>
+          <td>Cluj</td>
+          <td>Popescu I.</td>
+          <td>Mediu</td>
+          <td>2026-03-15</td>
+          <td>În Analiză</td>
+          <td>Ridicat</td>
+          <td><button>Detalii</button></td>
+        </tr>
+        <tr>
+          <td>#002</td>
+          <td>București</td>
+          <td>Ionescu A.</td>
+          <td>Transport</td>
+          <td>2026-03-18</td>
+          <td>Aprobat</td>
+          <td>Mediu</td>
+          <td><button>Detalii</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

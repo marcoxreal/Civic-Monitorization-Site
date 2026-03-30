@@ -1,0 +1,68 @@
+/* Variabile CSS pentru consistenta */
+:root {
+    --sidebar-width: 220px;
+    --dark-bg: #1a1a1a;
+    --accent-blue: #3498db;
+    --text-gray: #ecf0f1;
+}
+
+/* Reset de baza pt a permite sidebar-ul fix */
+body {
+    margin: 0;
+    padding-left: var(--sidebar-width); /* impingem tot continutul la dreapta */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Stilul pentru navigatia verticala */
+.main-nav {
+    position: fixed;   /* ramane pe loc cand dai scroll */
+    left: 0;
+    top: 0;
+    height: 100vh;     /* ocupa toata inaltimea ecranului */
+    width: var(--sidebar-width);
+    background-color: var(--dark-bg);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column; /* FLEXBOX: elementele se asaza pe verticala */
+}
+
+.main-nav li {
+    width: 100%;
+}
+
+.nav-link {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-gray);
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* Selector pseudo-clasa :hover */
+.nav-link:hover {
+    background-color: #333;
+    border-left: 4px solid var(--accent-blue);
+    padding-left: 30px; /* efect de glisare la dreapta */
+    color: #fff;
+}
+
+/* Stil pt restul continutului (Main, Header, etc) */
+main, header, footer {
+    padding: 20px 40px;
+    max-width: 1000px;
+}
+
+/* Ajustare tabele pentru a nu iesi din pagina */
+table {
+    background: white;
+    width: 100%;
+}

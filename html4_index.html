@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ro">
+<head>
+  <title>Civic Vote - Monitorizare HTML 4</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body bgcolor="#E6E6E6">
+
+<center>
+  <h1><a name="top">Portalul Civic de Monitorizare</a></h1>
+  <hr>
+</center>
+
+<h2>Structura Partidelor Politice</h2>
+<ol type="A" start="1">
+  <li><strong>Partidul Digitalizării (PD)</strong>
+    <ul>
+      <li>Deputat Popescu Ion - <span title="Expert IT">Specialist Cybersecurity</span></li>
+      <li>Senator Ionescu Ana</li>
+    </ul>
+  </li>
+  <li><strong>Uniunea pentru Transparență (UT)</strong>
+    <ol type="I">
+      <li>Comisia de Etică
+        <ul>
+          <li>Membru: Ștefan cel Mare (Diacritic test: ș, ț, ă, î, â)</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h2>Tabel Proiecte (Complexitate: 3 tabele, 2 imbricate)</h2>
+<table border="2" width="100%" bgcolor="#FFFFFF">
+  <tr bgcolor="#CCCCCC">
+    <th colspan="2" align="center">Identificator Lege</th>
+    <th rowspan="2" valign="top">Descriere Sumară</th>
+    <th>Detalii Tehnice</th>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" height="50">L001</td>
+    <td align="center">Mediu</td>
+    <td>
+      <table border="1" width="80%" align="center">
+        <tr>
+          <td bgcolor="#FFCCCC">Urgență: Ridicată</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" bgcolor="#F9F9F9">Notă: Toate legile sunt publice.</td>
+    <td>Proiect de lege pentru <strong>reducerea emisiilor</strong> de CO2 în orașe.</td>
+    <td>
+      <table border="1" width="100%">
+        <tr>
+          <td align="right">Voturi:</td>
+          <td align="left">150</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<h2>Căutare și Filtrare Proiecte (Strict HTML 4.01)</h2>
+<form action="http://www.scs.ubbcluj.ro/~user/pw/lab1/post" method="post">
+  <fieldset>
+    <legend>Parametri de Căutare</legend>
+    <table border="0" width="100%">
+      <tr>
+        <td>
+          1. Cuvânt cheie (Text): <input type="text" name="keyword" size="20">
+        </td>
+        <td>
+          2. Parolă acces (Password): <input type="password" name="pass" size="10">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          3. Data (Text manual): <input type="text" name="data" value="ZZ-LL-AAAA" size="10">
+        </td>
+        <td>
+          4. Procent impact (Text): <input type="text" name="impact" size="3" maxlength="3"> %
+        </td>
+      </tr>
+      <tr>
+        <td>
+          5. Include respinse (Checkbox): <input type="checkbox" name="respinse" value="da">
+        </td>
+        <td>
+          6. Nivel Urgență (Radio):
+          <input type="radio" name="prio" value="1"> 1
+          <input type="radio" name="prio" value="2"> 2
+        </td>
+      </tr>
+      <tr>
+        <td>
+          7. Email contact (Text): <input type="text" name="email" size="20">
+        </td>
+        <td>
+          8. Telefon (Text): <input type="text" name="tel" size="15">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          9. URL Sursă (Text): <input type="text" name="sursa" size="25" value="http://">
+        </td>
+        <td>
+          10. Atașează document (File): <input type="file" name="fisier">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          11. Cod Identificare (Read-only): <input type="text" name="cid" value="REF-44" readonly="readonly" size="10">
+        </td>
+        <td>
+          12. Cod Secret (Hidden): <input type="hidden" name="token" value="secret_401"> (Ascuns)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          13. Observații (Textarea): <br> <textarea name="obs" rows="2" cols="20"></textarea>
+        </td>
+        <td>
+          14. Resetează formularul: <input type="reset" value="Anulează tot">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          15. Finalizare acțiune: <input type="submit" value="Trimite Datele">
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</form>
+
+<p align="center">
+  <br>
+  <img src="https://via.placeholder.com/100" alt="Logo" width="100" height="50" border="1">
+  <br>
+  <a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/profil_html">Mergi la Pagina de Profil (Formular)</a>
+</p>
+
+</body>
+</html>

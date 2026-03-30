@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Civic Vote - Demonstrație Sprites CSS</title>
+  <link rel="stylesheet" href="style_sprites.css">
+</head>
+<body>
+
+<nav class="main-nav">
+  <ul>
+    <li>
+      <a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/index_html" class="nav-link icon-link icon-home">
+        <span>Acasă</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/dashboard_html" class="nav-link icon-link icon-dash">
+        <span>Monitorizare (Dashboard)</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/profil_html" class="nav-link icon-link icon-user">
+        <span>Profil Cetățean</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/sprites_html" class="nav-link icon-link icon-star">
+        <span>Statistici (Sprites)</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<main>
+  <header>
+    <h1>Demonstrație Tehnologică: Sprites CSS</h1>
+    <p>Această pagină explică modul în care o singură imagine combinată este folosită pentru a afișa iconițe multiple, reducând numărul de cereri HTTP către server.</p>
+  </header>
+
+  <section class="explanation">
+    <h2>Cum funcționează?</h2>
+    <div class="sprite-demo-container">
+      <p>În mod normal, pentru 4 iconițe, browserul ar descărca 4 fișiere imagine separate. Folosind Sprites, descărcăm o singură imagine care le conține pe toate.</p>
+
+      <h3>1. Imaginea Sursă (Mozaic)</h3>
+      <p>Aceasta este imaginea completă, invizibilă utilizatorului, pe care o vom încărca ca background:</p>
+      <img src="sprite.png"
+           alt="Exemplu de imagine Sprite"
+           class="sprite-source-img">
+
+      <h3>2. Rezultatul în Meniu</h3>
+      <p>Folosind <code>background-position</code>, vom „decupa” doar bucata care ne interesează pentru fiecare link din meniul de sus.</p>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

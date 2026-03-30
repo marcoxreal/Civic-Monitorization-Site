@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Civic Vote - HTML 4</title>
+</head>
+<body bgcolor="#E0E0E0">
+
+<center>
+  <table border="1" bgcolor="#FFFFFF" width="600" cellpadding="20">
+    <tr>
+      <td>
+        <h1 align="center">Înregistrare Cetățean</h1>
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Datele dumneavoastră</legend>
+
+            <p>Nume și Prenume:<br>
+              <input type="text" name="nume" size="40" value="Ex: Popescu Ion"></p>
+
+            <p>Județul (Alegeți):<br>
+              <select name="judet">
+                <option value="CJ">Cluj</option>
+                <option value="DB" selected>Dâmbovița</option>
+                <option value="B">București</option>
+              </select></p>
+
+            <p>Interese politice:<br>
+              <input type="checkbox" name="i1" checked> Mediu
+              <input type="checkbox" name="i2"> Educație</p>
+
+            <p>Sunteți major?<br>
+              <input type="radio" name="varsta" value="da" checked> Da
+              <input type="radio" name="varsta" value="nu"> Nu</p>
+
+            <p>Opinie civică:<br>
+              <textarea name="op" rows="4" cols="45">Scrieți aici...</textarea></p>
+
+            <input type="submit" value="Trimite Formularul">
+          </fieldset>
+        </form>
+      </td>
+    </tr>
+  </table>
+</center>
+
+</body>
+</html>

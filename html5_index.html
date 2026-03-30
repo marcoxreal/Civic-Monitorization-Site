@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Vote - Monitorizare</title>
+
+  <link rel="stylesheet" href="style_responsive.css">
+
+  <style>
+
+      body {
+          font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+          line-height: 1.6;
+          color: #333;
+          background-color: #f4f7f6;
+          margin: 0;
+          padding: 0;
+      }
+
+      main {
+          max-width: 1000px;
+          margin: 20px auto;
+          padding: 20px;
+          background: #fff;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+          border-radius: 8px;
+      }
+
+      h1 {
+          animation: slideIn 1.2s ease-out;
+          color: #2c3e50;
+          text-align: center;
+          margin-bottom: 10px;
+      }
+
+      h2 {
+          border-bottom: 2px solid #3498db;
+          padding-bottom: 10px;
+          color: #2980b9;
+          margin-top: 30px;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 25px;
+          font-size: 0.95rem;
+          border: none;
+      }
+
+      th {
+          background-color: #34495e;
+          color: white;
+          text-transform: uppercase;
+          font-size: 0.85rem;
+          letter-spacing: 1px;
+      }
+
+      th, td {
+          padding: 12px 15px;
+          text-align: left;
+          border-bottom: 1px solid #eee;
+      }
+
+      tr:hover {
+          background-color: #f9f9f9;
+      }
+
+      td table {
+          background: transparent;
+          margin: 0;
+          width: 100%;
+      }
+
+      td table td {
+          border: none !important;
+          padding: 2px 5px;
+      }
+
+      section {
+          margin-bottom: 40px;
+      }
+
+      ol > li {
+          margin-bottom: 15px;
+          padding: 15px;
+          background: #fcfcfc;
+          border-left: 5px solid #3498db;
+          list-style-position: inside;
+          border-radius: 0 4px 4px 0;
+          box-shadow: 2px 2px 5px rgba(0,0,0,0.02);
+      }
+
+      @keyframes slideIn {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+      button {
+          padding: 8px 15px;
+          border: none;
+          border-radius: 4px;
+          background-color: #3498db;
+          color: white;
+          transition: 0.3s;
+      }
+
+      button:hover {
+          background-color: #2980b9;
+          cursor: pointer;
+          transform: scale(1.05);
+      }
+  </style>
+</head>
+<body>
+
+<nav class="main-nav">
+  <ul>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/index_html" class="nav-link">Acasă</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/dashboard_html" class="nav-link">Monitorizare (Dashboard)</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/profil_html" class="nav-link">Profil Cetățean</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/sprites_html" class="nav-link star-icon">Statistici (Sprites)</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1 id="top">Portalul Civic de Monitorizare</h1>
+  <hr>
+</header>
+
+<main>
+  <section>
+    <h2>Structura Partidelor Politice</h2>
+    <ol type="A">
+      <li><strong>Partidul Digitalizării (PD)</strong>
+        <ul>
+          <li> Ion Popesco - <span title="Expert IT">Specialist Cybersecurity</span></li>
+          <li>Senator Ionescu Ana</li>
+        </ul>
+      </li>
+      <li><strong>Uniunea pentru Transparență (UT)</strong>
+        <ol type="I">
+          <li>Comisia de Etică
+            <ul>
+              <li>Membru: Ștefan cel Mare</li>
+            </ul>
+          </li>
+          <li>Consiliul Economiilor
+            <ul>
+              <li>Alex Cioban</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+      <li><strong>Alianța Verde (AV)</strong>
+        <ul>
+          <li>Consilier Vasile Irimia</li>
+          <li>Expert Biodiversitate: Maria Enache</li>
+        </ul>
+      </li>
+      <li><strong>Coaliția pentru Alianța Românilor (CUR)</strong>
+        <ul>
+          <li>George Kirkion</li>
+          <li>Expert Industria Calului: George Călinescu</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+
+  <section>
+    <h2>Tabel Proiecte Legislative</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>ID & Categorie</th>
+        <th>Titlu Proiect și Descriere</th>
+        <th>Status și Urgență</th>
+        <th>Detalii Tehnice (Voturi/Buget)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <table border="0">
+            <tr><td><strong>L001</strong></td></tr>
+            <tr><td><small>Mediu</small></td></tr>
+          </table>
+        </td>
+        <td>
+          Proiect de lege pentru <strong>reducerea emisiilor</strong> de CO2 în orașe.
+          <br><small>Inițiator: Partidul Digitalizării</small>
+        </td>
+        <td align="center">
+          <span style="color: red;">Urgență: Ridicată</span>
+          <br>Status: În Analiză
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td>Voturi:</td>
+              <td align="right">150</td>
+            </tr>
+            <tr>
+              <td>Progres:</td>
+              <td align="right">65%</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <table border="0">
+            <tr><td><strong>L002</strong></td></tr>
+            <tr><td><small>Educație</small></td></tr>
+          </table>
+        </td>
+        <td>
+          Digitalizarea <strong>manualelor școlare</strong> pentru mediul rural.
+          <br><small>Inițiator: Uniunea pentru Transparență</small>
+        </td>
+        <td align="center">
+          <span style="color: yellowgreen;">Urgență: Medie</span>
+          <br>Status: Aprobat
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td>Buget:</td>
+              <td align="right">2M €</td>
+            </tr>
+            <tr>
+              <td>Beneficiari:</td>
+              <td align="right">50k</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <table border="0">
+            <tr><td><strong>L003</strong></td></tr>
+            <tr><td><small>Sănătate</small></td></tr>
+          </table>
+        </td>
+        <td>
+          Construirea de <strong>centre de prim ajutor</strong> în zone izolate.
+          <br><small>Inițiator: Alianța Verde</small>
+        </td>
+        <td align="center">
+          <span style="color: darkorange;">Urgență: Critică</span>
+          <br>Status: Dezbatere
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td>Voturi Pro:</td>
+              <td align="right">89</td>
+            </tr>
+            <tr>
+              <td>Voturi Contra:</td>
+              <td align="right">12</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" bgcolor="#f9f9f9">
+          <strong>Notă:</strong> Toate proiectele afișate sunt în conformitate cu normele de transparență publică.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+<!--  <section>-->
+<!--    <h2>Filtrare Avansată</h2>-->
+<!--    <form action="http://www.scs.ubbcluj.ro/~user/pw/lab1/post" method="post">-->
+<!--      <table>-->
+<!--        <tr>-->
+<!--          <td><label>1. Căutare text: <input type="text" name="cautare" placeholder="Introduceți subiectul..."></label></td>-->
+<!--          <td><label>2. Parolă arhivă: <input type="password" name="cheie"></label></td>-->
+<!--          <td><label>3. Dată publicare: <input type="date" name="data_pub"></label></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><label>4. Nr. pagini: <input type="number" name="pagini" min="1" max="1000"></label></td>-->
+<!--          <td><label>5. Prioritate: <input type="range" name="prio" min="1" max="5"></label></td>-->
+<!--          <td><label>6. Ora dezbaterii: <input type="time" name="ora_sedinta"></label></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><label>7. Email: <input type="email" name="contact"></label></td>-->
+<!--          <td><label>8. Telefon: <input type="tel" name="telefon"></label></td>-->
+<!--          <td><label>9. Link: <input type="url" name="link_extern"></label></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><label>10. Culoare: <input type="color" name="culoare" value="#0000FF"></label></td>-->
+<!--          <td><label>11. Căutare: <input type="search" name="quick_find"></label></td>-->
+<!--          <td><label>12. Fișier: <input type="file" name="fisier"></label></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><label>13. Săptămâna: <input type="week" name="saptamana"></label></td>-->
+<!--          <td><label>14. Lună: <input type="month" name="luna_start"></label></td>-->
+<!--          <td>-->
+<!--            15. Status:-->
+<!--            <label><input type="checkbox" name="activ" value="da" checked> Activ</label>-->
+<!--            <input type="hidden" name="token" value="SECURE123">-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td colspan="3">-->
+<!--            <button type="submit">Trimite</button>-->
+<!--            <button type="reset">Resetează</button>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      </table>-->
+<!--    </form>-->
+<!--  </section>-->
+</main>
+
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* Definim dimensiunea unei iconite ca variabila pt mentenanta usoara */
+:root {
+    --icon-size: 32px;
+    --sprite-path: url('sprite.png');
+}
+
+/* Stilul de baza pt link-urile cu iconita */
+.icon-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Cream fereastra prin care vedem iconița folosind un pseudo-element */
+.icon-link::before {
+    content: "";
+    display: inline-block;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-image: var(--sprite-path);
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+    transition: filter 0.3s ease;
+}
+
+/* Coordonatele pt fiecare iconita (background-position: X Y) */
+/* deplasam imaginea la stanga (val negative) pt a aduce iconita la fereastra */
+
+.icon-home::before {
+    background-position: 0 0;
+}
+
+.icon-dash::before {
+    background-position: -32px 0;
+}
+
+.icon-user::before {
+    background-position: -64px 0;
+}
+
+.icon-star::before {
+    background-position: -96px 0;
+}
+
+/* Efect vizual la hover: putem schimba luminozitatea sprite-ului */
+.icon-link:hover::before {
+    filter: brightness(1.2) drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}

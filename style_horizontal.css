@@ -1,0 +1,62 @@
+/* definim variabilele CSS */
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --text-light: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+/* stil de baza pentru meniu */
+.main-nav {
+    background-color: var(--primary-color);
+    padding: 0;
+    margin-bottom: 20px;
+    /* animatie la incarcarea paginii */
+    animation: slideDown 0.8s ease-out;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* FLEXBOX pt aliniere orizontala */
+    justify-content: center;
+}
+
+.main-nav li {
+    margin: 0;
+}
+
+.nav-link {
+    display: block;
+    padding: 15px 25px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+/* Pseudo-clasa :hover cu animatie de scalare */
+.nav-link:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+/* Pseudo-clasa :focus pentru accesibilitate (tastatura TAB) */
+.nav-link:focus {
+    outline: 3px solid #f1c40f;
+    background-color: #1a252f;
+}
+
+/* definirea animatiei Keyframes */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
