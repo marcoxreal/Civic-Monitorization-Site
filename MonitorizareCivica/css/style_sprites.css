@@ -1,7 +1,7 @@
 /* Definim dimensiunea unei iconite ca variabila pt mentenanta usoara */
 :root {
     --icon-size: 32px;
-    --sprite-path: url('sprite.png');
+    --sprite-path: url('../sprite.png');
 }
 
 /* Stilul de baza pt link-urile cu iconita */
