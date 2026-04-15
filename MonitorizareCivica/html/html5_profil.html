@@ -2,7 +2,8 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <title>Civic Vote - Profil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Vote - Profil Cetățean</title>
   <style>
       :root {
           --primary: #2575fc;
@@ -13,7 +14,7 @@
       }
 
       body {
-          font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+          font-family: 'Inter', 'Segoe UI', sans-serif;
           line-height: 1.6;
           color: #444;
           background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -24,243 +25,220 @@
 
       .main-nav {
           background: linear-gradient(to right, var(--secondary), var(--primary));
-          padding: 0;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
           position: sticky;
           top: 0;
           z-index: 1000;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
       .main-nav ul { display: flex; list-style: none; justify-content: center; margin: 0; padding: 0; }
       .nav-link {
           color: white;
           text-decoration: none;
-          padding: 15px 25px;
+          padding: 18px 25px;
           display: block;
           font-weight: 500;
-          transition: background 0.3s, transform 0.2s;
+          transition: 0.3s;
       }
-      .nav-link:hover {
-          background: rgba(255,255,255,0.1);
-          transform: translateY(-2px);
-      }
+      .nav-link:hover { background: rgba(255,255,255,0.1); }
 
       main {
-          max-width: 1100px;
+          max-width: 800px;
           margin: 40px auto;
-          padding: 30px;
+          padding: 40px;
           background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(10px);
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
           border-radius: 15px;
+          animation: slideIn 0.8s ease-out;
       }
 
-      h1 {
-          color: var(--dark);
-          text-align: center;
-          font-size: 2.5rem;
+      h1 { color: var(--dark); text-align: center; margin-bottom: 30px; }
+
+      fieldset {
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 25px;
           margin-bottom: 30px;
-          letter-spacing: -1px;
-      }
-
-      h2 {
-          color: var(--accent);
-          border-left: 5px solid var(--accent);
-          padding-left: 15px;
-          margin-top: 40px;
-          font-weight: 600;
-      }
-
-      table {
-          width: 100%;
-          border-collapse: separate;
-          border-spacing: 0;
-          margin: 25px 0;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-      }
-      th {
-          background-color: var(--dark);
-          color: white;
-          padding: 15px;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-          letter-spacing: 1px;
-      }
-      td {
-          padding: 15px;
-          border-bottom: 1px solid #edf2f7;
           background: white;
       }
-      tr:last-child td { border-bottom: none; }
-      tr:hover td { background-color: #f1f7ff; }
-
-      td table td {
-          padding: 2px !important;
-          background: transparent !important;
+      legend {
+          font-weight: bold;
+          color: var(--primary);
+          padding: 0 10px;
+          font-size: 1.1rem;
       }
 
-      .dependency-section {
-          background: #ffffff;
-          padding: 25px;
-          border-radius: 12px;
-          border: 1px solid #e2e8f0;
-          box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 20px;
       }
-      .dependency-section select {
+
+      label { font-weight: 600; color: var(--dark); }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="number"],
+      input[type="date"],
+      select,
+      textarea {
           padding: 12px;
+          border: 1px solid #ccc;
           border-radius: 8px;
-          border: 2px solid #cbd5e0;
+          font-size: 1rem;
           width: 100%;
-          max-width: 300px;
-          outline: none;
+          box-sizing: border-box;
           transition: border-color 0.3s;
       }
-      .dependency-section select:focus { border-color: var(--accent); }
-      .dependency-section select:disabled { background: #f7fafc; cursor: not-allowed; }
 
-      ol { padding-left: 20px; }
-      ol > li {
-          margin-bottom: 20px;
-          padding: 20px;
-          background: #fff;
-          border-radius: 10px;
-          border: 1px solid #e2e8f0;
-          transition: transform 0.3s;
+      input:focus, select:focus {
+          border-color: var(--accent);
+          outline: none;
       }
-      ol > li:hover { transform: scale(1.01); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-      ol > li strong { color: var(--primary); font-size: 1.1rem; }
 
-      ul { list-style-type: '→ '; padding-left: 25px; margin-top: 10px; }
-      ul li { color: #555; margin-bottom: 5px; }
+      .radio-group { display: flex; flex-direction: row; gap: 20px; align-items: center; padding: 10px 0; }
+      .radio-group label { font-weight: normal; cursor: pointer; }
+
+      .range-container {
+          background: #f8fafc;
+          padding: 15px;
+          border-radius: 8px;
+          margin-top: 5px;
+          text-align: center;
+      }
+
+      .actions {
+          display: flex;
+          gap: 15px;
+          justify-content: center;
+          margin-top: 20px;
+      }
+
+      input[type="submit"], input[type="reset"] {
+          padding: 12px 40px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: bold;
+          border: none;
+          transition: 0.2s;
+      }
+
+      input[type="submit"] { background: var(--primary); color: white; }
+      input[type="reset"] { background: #edf2f7; color: var(--dark); }
+      input[type="submit"]:hover { background: var(--secondary); transform: translateY(-2px); }
 
       @keyframes slideIn {
           from { opacity: 0; transform: translateY(-20px); }
           to { opacity: 1; transform: translateY(0); }
       }
-      main { animation: slideIn 0.8s ease-out; }
-
-      span[style*="color: red"] {
-          background: #fff5f5; padding: 4px 10px; border-radius: 20px; font-weight: bold; font-size: 0.8rem;
-      }
   </style>
-  <link rel="stylesheet" href="../css/style_horizontal.css">
 </head>
 <body>
 
 <nav class="main-nav">
   <ul>
     <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/index_html" class="nav-link">Acasă</a></li>
-    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/dashboard_html" class="nav-link">Monitorizare (Dashboard)</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/dashboard_html" class="nav-link">Dashboard</a></li>
     <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/profil_html" class="nav-link">Profil Cetățean</a></li>
-    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/sprites_html" class="nav-link star-icon">Statistici (Sprites)</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/sprites_html" class="nav-link star-icon">Sprites</a></li>
   </ul>
 </nav>
 
-<center><h1>Înscriere Cetățean ACTIV</h1></center>
+<main>
+  <h1>Înscriere Cetățean ACTIV</h1>
 
-<form action="http://www.scs.ubbcluj.ro/~user/pw/lab1/post" method="post" name="formular_profil">
-  <fieldset>
-    <legend>Informații Cont</legend>
-    <p>
-      Nume Complet: <input type="text" name="nume" size="40" maxlength="30" value="">
-      <br><br>
-      Cod Siguranță (Read-only): <input type="text" name="id" value="ID-99" readonly="readonly" size="10">
-    </p>
+  <form id="form-profil" action="http://www.scs.ubbcluj.ro/~user/pw/lab1/post" method="post">
 
-    <p>
-      Gen:
-      <input type="radio" name="sex" value="m" checked="checked"> Masculin
-      <input type="radio" name="sex" value="f"> Feminin
-      <input type="radio" name="sex" value="nb"> Non-Binar
-      <input type="radio" name="sex" value="a"> Altul
-    </p>
+    <fieldset>
+      <legend>Date Identificare</legend>
+      <div class="form-group">
+        <label for="p-nume">Nume Complet (fără cifre)</label>
+        <input type="text" id="p-nume" name="nume" placeholder="Ex: Popescu Ion">
+      </div>
+      <div class="form-group">
+        <label for="p-email">Adresă Email</label>
+        <input type="email" id="p-email" name="email" placeholder="email@exemplu.ro">
+      </div>
+      <div class="form-group">
+        <label for="p-parola">Parolă (minim 8 caractere)</label>
+        <input type="password" id="p-parola" name="parola">
+      </div>
+    </fieldset>
 
-    <p>
-      Doriți newsletter? <input type="checkbox" name="news" value="da"> Da
-      <br>
-      Acceptați GDPR? <input type="checkbox" name="gdpr" value="da" disabled="disabled"> (Indisponibil temporar)
-    </p>
-  </fieldset>
+    <fieldset>
+      <legend>Informații Personale</legend>
+      <div class="form-group">
+        <label for="input-varsta-profil">Vârsta (min. 18 ani)</label>
+        <input type="number" id="input-varsta-profil" name="varsta" value="18" min="18" max="100">
+      </div>
+      <div class="form-group">
+        <label for="input-data-nastere">Data Nașterii</label>
+        <input type="date" id="input-data-nastere" name="data_nastere">
+        <small id="v-helper" style="color: gray;">Introduceți vârsta pentru a vedea anii posibili.</small>
+      </div>
+      <div class="form-group">
+        <label>Gen</label>
+        <div class="radio-group">
+          <label><input type="radio" name="sex" value="m" checked> Masculin</label>
+          <label><input type="radio" name="sex" value="f"> Feminin</label>
+          <label><input type="radio" name="sex" value="nb"> Non-Binar</label>
+          <label><input type="radio" name="sex" value="a"> Altul</label>
+        </div>
+      </div>
+    </fieldset>
 
-  <fieldset>
-    <legend>Preferințe Politice (Diacritice: ă, î, â, ș, ț)</legend>
-    <p>
-      Selectați județul:
-      <select name="judet" id="select-judet">
-        <option value="">-- Alege Județ --</option>
-        <option value="CJ">Cluj</option>
-        <option value="B">București</option>
-        <option value="DB">Dâmbovița</option>
-      </select>
-    </p>
+    <fieldset>
+      <legend>Localizare și Interese</legend>
+      <div class="form-group">
+        <label for="select-judet">Județ</label>
+        <select name="judet" id="select-judet">
+          <option value="">-- Alege Județ --</option>
+          <option value="CJ">Cluj</option>
+          <option value="B">București</option>
+          <option value="DB">Dâmbovița</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="select-localitate">Localitate</label>
+        <select name="localitate" id="select-localitate" disabled>
+          <option value="">-- Alege județul întâi --</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Poziție Economică</label>
+        <div class="range-container">
+          <input type="range" name="economic" value="0" min="-100" max="100" step="10" oninput="this.nextElementSibling.value = this.value">
+          <output>0</output>
+        </div>
+        <label>Poziție Socială</label>
+        <div class="range-container">
+          <input type="range" name="economic" value="0" min="-100" max="100" step="10" oninput="this.nextElementSibling.value = this.value">
+          <output>0</output>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Interese Multiple (CTRL+Click)</label>
+        <select name="interese" size="4" multiple>
+          <option value="1">Educație</option>
+          <option value="2">Sănătate</option>
+          <option value="3">Infrastructură</option>
+          <option value="4">Mediu</option>
+        </select>
+      </div>
+    </fieldset>
 
-    <p>
-      Selectați localitatea:
-      <select name="localitate" id="select-localitate" disabled>
-        <option value="">-- Alege județul întâi --</option>
-      </select>
-    </p>
+    <div class="actions">
+      <input type="submit" value="Trimite">
+      <input type="reset" value="Resetează">
+    </div>
+  </form>
+</main>
 
-    <p>
-      Poziție Economică (Stânga -100 / Dreapta +100): <br>
-      <input type="range" name="economic" value="0" min="-100" max="100" step="10"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>0</output>
-    </p>
-
-    <p>
-      Poziție Socială (Libertarian -100 / Authoritarian +100): <br>
-      <input type="range" name="social" value="0" min="-100" max="100" step="10"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>0</output>
-    </p>
-
-    <p>
-      Interese multiple (folosiți CTRL): <br>
-      <select name="interese" size="5" multiple="multiple">
-        <option value="1">Educație și Școală</option>
-        <option value="2">Sănătate Publică</option>
-        <option value="3">Infrastructură Drumuri</option>
-        <option value="4">Păduri și Ape</option>
-        <option value="5">Cultură și Tradiții</option>
-      </select>
-    </p>
-
-    <p>
-      Vârsta: <input type="number" id="input-varsta-profil" name="varsta" value="18" min="18" max="100" step="1">
-    </p>
-
-    <p>
-      Data nașterii (Validare automată):
-      <input type="date" name="data_nastere" id="input-data-nastere">
-      <br><small id="v-helper" style="color: gray;">Se calculează automat pe baza vârstei.</small>
-    </p>
-
-    <script src="../javascript/date_dependente.js"></script>
-    <script src="../javascript/logica_profil.js"></script>
-
-    <p>
-      Opinie civică (Textarea):<br>
-      <textarea name="opinie" cols="50" rows="4" placeholder="Scrieți aici părerile..."></textarea>
-    </p>
-  </fieldset>
-
-  <center>
-    <input type="submit" value="Trimite" title="Trimite Datele">
-    <input type="reset" value="Resetează">
-  </center>
-</form>
-
-<hr>
-<div align="left">
-  <p>Informații suplimentare în <b>subsol</b>.</p>
-  <p>Vizitați secțiunea de <i>ajutor</i> pentru detalii.</p>
-</div>
-
-<p align="right">
-  <a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/index_html">Înapoi la pagina principală</a>
-</p>
+<script src="../javascript/date_dependente.js"></script>
+<script src="../javascript/logica_profil.js"></script>
+<script src="../javascript/logica_validare.js"></script>
 
 </body>
 </html>

@@ -5,48 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Civic Vote - Monitorizare</title>
   <style>
-      body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0; }
-      main { max-width: 1000px; margin: 20px auto; padding: 20px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 8px; }
-      h1 { animation: slideIn 1.2s ease-out; color: #2c3e50; text-align: center; }
-      h2 { border-bottom: 2px solid #3498db; padding-bottom: 10px; color: #2980b9; margin-top: 30px; }
+      :root {
+          --primary-blue: #2980b9;
+          --dark-slate: #34495e;
+          --light-bg: #f4f7f6;
+          --white: #ffffff;
+          --border-color: #dee2e6;
+      }
 
-      .main-nav { background-color: #2980b9; padding: 10px; }
-      .main-nav ul { display: flex; list-style: none; justify-content: center; margin: 0; padding: 0; }
-      .nav-link { color: white; text-decoration: none; padding: 10px 20px; display: block; }
+      body {
+          font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+          line-height: 1.6;
+          color: #333;
+          background-color: var(--light-bg);
+          margin: 0;
+          padding: 0;
+      }
 
-      table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
-      th { background-color: #34495e; color: white; padding: 12px; text-align: left; }
+      .main-nav {
+          background-color: var(--dark-slate);
+          padding: 0;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      .main-nav ul {
+          display: flex;
+          list-style: none;
+          justify-content: center;
+          margin: 0;
+          padding: 0;
+      }
+      .nav-link {
+          color: white;
+          text-decoration: none;
+          padding: 15px 25px;
+          display: block;
+          transition: background 0.3s;
+      }
+      .nav-link:hover { background-color: var(--primary-blue); }
+
+      main { max-width: 1100px; margin: 20px auto; padding: 20px; }
+
+      h1 { color: var(--dark-slate); text-align: center; margin-bottom: 30px; animation: slideIn 1.2s ease-out; }
+      h2 { border-bottom: 2px solid var(--primary-blue); padding-bottom: 8px; color: var(--primary-blue); margin-top: 40px; }
+
+      section {
+          background: var(--white);
+          padding: 25px;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+          margin-bottom: 30px;
+      }
+
+      /* Carusel */
+      #carousel-container { position: relative; width: 100%; height: 350px; overflow: hidden; border-radius: 10px; }
+      .slide-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
+      .slide-text { position: absolute; bottom: 20px; left: 20px; color: white; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 5px; }
+      .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; cursor: pointer; font-size: 20px; z-index: 10; transition: background 0.3s; }
+      .nav-btn:hover { background: rgba(0,0,0,0.8); }
+
+      /* Poziționare butoane */
+      .btn-prev { left: 0; }
+      .btn-next { right: 0; }
+
+      /* TABEL SORTABIL */
+      table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+      th { background-color: var(--dark-slate); color: white; padding: 12px; text-align: left; }
+      th.sortable { cursor: pointer; position: relative; }
+      th.sortable:after { content: ' ↕'; font-size: 0.8em; opacity: 0.5; }
       td { padding: 12px; border-bottom: 1px solid #eee; }
-      tr:hover { background-color: #f9f9f9; }
-      td table td { border: none !important; padding: 2px 5px; }
+      tr:hover { background-color: #fcfcfc; }
 
-      .dependency-section { background-color: #ebf5fb; padding: 20px; border-radius: 8px; border: 1px solid #d6eaf8; margin-bottom: 30px; }
-      .dependency-section select { padding: 10px; border-radius: 4px; border: 1px solid #bdc3c7; width: 250px; margin-top: 5px; }
+      /* LISTE COLAPSABILE  */
+      .collapsible-item { cursor: pointer; list-style-type: none; font-weight: bold; padding: 8px 0; display: block; }
+      .collapsible-item::before { content: '▼ '; color: var(--primary-blue); }
+      .collapsible-item.collapsed::before { content: '► '; }
+      .nested-list { display: block; margin-left: 20px; }
+      .nested-list.hidden { display: none; }
 
-      ol > li { margin-bottom: 15px; padding: 15px; background: #fcfcfc; border-left: 5px solid #3498db; list-style-position: inside; }
+      /* FORMULARE VERTICALE */
+      form { display: flex; flex-direction: column; gap: 15px; max-width: 600px; }
+      .form-group { display: flex; flex-direction: column; gap: 5px; }
+      input[type="text"], input[type="date"], textarea, select {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          width: 100%;
+          box-sizing: border-box;
+      }
+      button[type="submit"] {
+          background-color: var(--primary-blue);
+          color: white;
+          border: none;
+          padding: 12px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: bold;
+          align-self: flex-start;
+      }
 
-      @keyframes slideIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
 <nav class="main-nav">
   <ul>
-    <li><a href="#" class="nav-link">Acasă</a></li>
-    <li><a href="#" class="nav-link">Monitorizare</a></li>
-    <li><a href="#" class="nav-link">Profil</a></li>
-    <li><a href="#" class="nav-link">Statistici</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/index_html" class="nav-link">Acasă</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/dashboard_html" class="nav-link">Dashboard</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/profil_html" class="nav-link">Profil Cetățean</a></li>
+    <li><a href="https://www.scs.ubbcluj.ro/~tmir3855/pw/lab1/html5/sprites_html" class="nav-link star-icon">Sprites</a></li>
   </ul>
 </nav>
 
 <main>
   <h1>Portalul Civic de Monitorizare</h1>
 
+  <section id="cerinta3">
+    <div id="carousel-container">
+      <a id="carousel-link" href="">
+        <img id="carousel-img" src="" class="slide-img">
+        <div id="carousel-caption" class="slide-text"></div>
+      </a>
+      <button class="nav-btn btn-prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="nav-btn btn-next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </section>
+
+  <section id="cerinta4">
+    <h2>Tabel Proiecte (Sortabil)</h2>
+    <table id="tabel-proiecte">
+      <thead>
+      <tr>
+        <th class="sortable" onclick="sortTable(0)">ID</th>
+        <th class="sortable" onclick="sortTable(1)">Titlu</th>
+        <th class="sortable" onclick="sortTable(2)">Voturi</th>
+      </tr>
+      </thead>
+      <tbody id="body-tabel">
+      </tbody>
+    </table>
+  </section>
+
+  <section id="cerinta5">
+    <h2>Structură Organizatorică (Colapsabilă)</h2>
+    <ul id="lista-principala">
+      <li>
+        <span class="collapsible-item">Departament Tehnic</span>
+        <ul class="nested-list">
+          <li>Divizia Software</li>
+          <li>Divizia Hardware</li>
+        </ul>
+      </li>
+      <li>
+        <span class="collapsible-item">Departament Juridic</span>
+        <ul class="nested-list">
+          <li>Achiziții Publici</li>
+          <li>Contestații</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
   <section class="dependency-section">
     <h2>Identificare Rapidă Reprezentant</h2>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-      <div>
-        <label>1. Alege Partidul:</label><br>
+    <form>
+      <div class="form-group">
+        <label>1. Alege Partidul:</label>
         <select id="select-partid">
           <option value="">-- Selectează --</option>
           <option value="PD">Partidul Digitalizării (PD)</option>
@@ -55,86 +182,97 @@
           <option value="CUR">Coaliția CUR</option>
         </select>
       </div>
-      <div>
-        <label>2. Membru disponibil:</label><br>
+      <div class="form-group">
+        <label>2. Membru disponibil:</label>
         <select id="select-membru" disabled>
           <option value="">-- Așteptare partid --</option>
         </select>
       </div>
-    </div>
+    </form>
   </section>
 
   <section>
-    <h2>Structura Partidelor Politice</h2>
-    <ol type="A">
-      <li><strong>Partidul Digitalizării (PD)</strong>
-        <ul>
-          <li>Ion Popesco - Specialist Cybersecurity</li>
-          <li>Senator Ionescu Ana</li>
-        </ul>
-      </li>
-      <li><strong>Uniunea pentru Transparență (UT)</strong>
-        <ol type="I">
-          <li>Comisia de Etică
-            <ul><li>Membru: Ștefan cel Mare</li></ul>
-          </li>
-          <li>Consiliul Economiilor
-            <ul><li>Alex Cioban</li></ul>
-          </li>
-        </ol>
-      </li>
-      <li><strong>Alianța Verde (AV)</strong>
-        <ul>
-          <li>Consilier Vasile Irimia</li>
-          <li>Maria Enache</li>
-        </ul>
-      </li>
-      <li><strong>Coaliția pentru Alianța Românilor (CUR)</strong>
-        <ul>
-          <li>George Kirkion</li>
-          <li>George Călinescu</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <h2>Tabel Proiecte Legislative</h2>
+    <h2>Detalii Proiecte Legislative</h2>
     <table>
       <thead>
       <tr>
-        <th>ID & Categorie</th>
-        <th>Titlu Proiect și Descriere</th>
-        <th>Status și Urgență</th>
+        <th>Cod</th>
+        <th>Titlu & Inițiator</th>
+        <th>Urgență</th>
         <th>Detalii Tehnice</th>
       </tr>
       </thead>
       <tbody>
       <tr>
-        <td><table><tr><td><strong>L001</strong></td></tr><tr><td><small>Mediu</small></td></tr></table></td>
+        <td><strong>L001</strong><br><small>Mediu</small></td>
         <td>Proiect reducere CO2. <br><small>Inițiator: PD</small></td>
-        <td align="center"><span style="color: red;">Urgență: Ridicată</span></td>
-        <td><table><tr><td>Voturi: 150</td></tr></table></td>
+        <td><span style="color: red; font-weight: bold;">Ridicată</span></td>
+        <td>Voturi: 150</td>
       </tr>
       <tr>
-        <td><table><tr><td><strong>L002</strong></td></tr><tr><td><small>Educație</small></td></tr></table></td>
+        <td><strong>L002</strong><br><small>Educație</small></td>
         <td>Digitalizare manuale. <br><small>Inițiator: UT</small></td>
-        <td align="center"><span style="color: yellowgreen;">Urgență: Medie</span></td>
-        <td><table><tr><td>Buget: 2M €</td></tr></table></td>
+        <td><span style="color: #78a100; font-weight: bold;">Medie</span></td>
+        <td>Buget: 2M €</td>
       </tr>
       <tr>
-        <td><table><tr><td><strong>L003</strong></td></tr><tr><td><small>Sănătate</small></td></tr></table></td>
+        <td><strong>L003</strong><br><small>Sănătate</small></td>
         <td>Centre prim ajutor. <br><small>Inițiator: AV</small></td>
-        <td align="center"><span style="color: darkorange;">Urgență: Critică</span></td>
-        <td><table><tr><td>Voturi Pro: 89</td></tr></table></td>
+        <td><span style="color: darkorange; font-weight: bold;">Critică</span></td>
+        <td>Voturi Pro: 89</td>
       </tr>
       </tbody>
     </table>
   </section>
+
+<!--  <section class="dependency-section">-->
+<!--    <h2>Contact Rapid</h2>-->
+<!--    <form id="form-contact">-->
+<!--      <div class="form-group">-->
+<!--        <label for="c-subiect">Subiect</label>-->
+<!--        <input type="text" id="c-subiect" placeholder="Subiectul mesajului">-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="c-mesaj">Mesaj</label>-->
+<!--        <textarea id="c-mesaj" rows="4" placeholder="Mesajul tău..."></textarea>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="c-fisier">Atașează document</label>-->
+<!--        <input type="file" id="c-fisier">-->
+<!--      </div>-->
+<!--      <button type="submit">Trimite Mesaj</button>-->
+<!--    </form>-->
+<!--  </section>-->
+
+  <section class="dependency-section">
+    <h2>Propunere Proiect Civic</h2>
+    <form id="form-proiect">
+      <div class="form-group">
+        <label for="pr-titlu">Titlu Proiect</label>
+        <input type="text" id="pr-titlu" placeholder="Ex: Modernizare Parcuri">
+      </div>
+      <div class="form-group">
+        <label for="pr-data">Data propunerii</label>
+        <input type="date" id="pr-data">
+      </div>
+      <div class="form-group">
+        <label for="pr-prioritate">Prioritate</label>
+        <select id="pr-prioritate">
+          <option value="">Alege prioritatea...</option>
+          <option value="mica">Mică</option>
+          <option value="mare">Mare</option>
+        </select>
+      </div>
+      <button type="submit">Depune Proiect</button>
+    </form>
+  </section>
+
 </main>
 
 <script src="../javascript/date_dependente.js"></script>
 <script src="../javascript/logica_dependente.js"></script>
+<script src="../javascript/logica_laborator.js"></script>
+<script src="../javascript/logica_validare.js"></script>
 
 </body>
 </html>
