@@ -77,14 +77,14 @@ function populateVerticalTable() {
   if (!table) return;
 
   // Curățăm datele vechi dacă există (păstrăm doar primul TH de pe fiecare rând)
-  Array.from(table.rows).forEach(row => {
+  Array.from(table.rows).forEach((row) => {
     while (row.cells.length > 1) {
       row.deleteCell(1);
     }
   });
 
   // Adăugăm datele din variabila globală dateProiecte (din date_dependente.js)
-  dateProiecte.forEach(p => {
+  dateProiecte.forEach((p) => {
     table.rows[0].insertCell(-1).innerText = p.id;
     table.rows[1].insertCell(-1).innerText = p.titlu;
     table.rows[2].insertCell(-1).innerText = p.voturi;
@@ -94,7 +94,7 @@ function populateVerticalTable() {
 
 // --- SORTARE TABEL VERTICAL ---
 function sortVertical(rowIndex) {
-  const table = document.getElementById("tabel-vertical");
+  const table = document.getElementById('tabel-vertical');
   const rows = Array.from(table.rows);
   const headerCell = rows[rowIndex].cells[0];
 
@@ -106,7 +106,7 @@ function sortVertical(rowIndex) {
   const numDataCols = rows[0].cells.length - 1;
 
   for (let j = 1; j <= numDataCols; j++) {
-    let col = rows.map(row => row.cells[j].innerText);
+    let col = rows.map((row) => row.cells[j].innerText);
     columns.push(col);
   }
 
@@ -122,7 +122,7 @@ function sortVertical(rowIndex) {
   });
 
   // 3. Update vizual header
-  rows.forEach(r => r.cells[0].classList.remove('sorted-asc', 'sorted-desc'));
+  rows.forEach((r) => r.cells[0].classList.remove('sorted-asc', 'sorted-desc'));
   headerCell.classList.add(isAsc ? 'sorted-asc' : 'sorted-desc');
 
   // 4. Scriem datele înapoi în tabel
@@ -147,3 +147,43 @@ window.onload = function () {
   initCollapsible();
   checkCreativeTheme();
 };
+
+
+// scor impact automat
+const titluInput = document.getElementById('pr-titlu');
+const prioritateSelect = document.getElementById('pr-prioritate');
+const fisierInput = document.getElementById('pr-fisier');
+const preview = document.getElementById('impact-preview');
+
+function calculeazaImpact() {
+  let scor = 0;
+
+  // prioritate
+  const prioritate = prioritateSelect.value;
+  if (prioritate === 'mare') scor += 40;
+  else if (prioritate === 'mica') scor += 20;
+
+  // lungime titlu
+  const titluLength = titluInput.value.length;
+  if (titluLength > 20) scor += 30;
+  else if (titluLength > 10) scor += 15;
+
+  // fisier atasat
+  if (fisierInput.files.length > 0) scor += 30;
+
+  // limitare
+  if (scor > 100) scor = 100;
+
+  // interpretare
+  let mesaj = '';
+  if (scor < 30) mesaj = 'Impact scăzut';
+  else if (scor < 70) mesaj = 'Impact mediu';
+  else mesaj = 'Impact ridicat';
+
+  preview.textContent = `Scor impact: ${scor} (${mesaj})`;
+}
+
+// event listeners
+titluInput.addEventListener('input', calculeazaImpact);
+prioritateSelect.addEventListener('change', calculeazaImpact);
+fisierInput.addEventListener('change', calculeazaImpact);

@@ -205,19 +205,19 @@
       <tbody>
       <tr>
         <td><strong>L001</strong><br><small>Mediu</small></td>
-        <td>Proiect reducere CO2. <br><small>Inițiator: PD</small></td>
+        <td>Proiect pentru reducerea dioxidului de carbon din urban. <br><small>Inițiator: PD</small></td>
         <td><span style="color: red; font-weight: bold;">Ridicată</span></td>
         <td>Voturi: 150</td>
       </tr>
       <tr>
         <td><strong>L002</strong><br><small>Educație</small></td>
-        <td>Digitalizare manuale. <br><small>Inițiator: UT</small></td>
+        <td>Proiect pentru digitalizarea guvernării. <br><small>Inițiator: UT</small></td>
         <td><span style="color: #78a100; font-weight: bold;">Medie</span></td>
         <td>Buget: 2M €</td>
       </tr>
       <tr>
         <td><strong>L003</strong><br><small>Sănătate</small></td>
-        <td>Centre prim ajutor. <br><small>Inițiator: AV</small></td>
+        <td>Construirea unor noi parcuri și/sau renovarea celor existente. <br><small>Inițiator: AV</small></td>
         <td><span style="color: darkorange; font-weight: bold;">Critică</span></td>
         <td>Voturi Pro: 89</td>
       </tr>
@@ -252,7 +252,11 @@
         <input type="text" id="pr-titlu" placeholder="Ex: Modernizare Parcuri">
       </div>
       <div class="form-group">
-        <label for="pr-data">Data propunerii</label>
+        <label for="pr-fisier">Atașează Document</label>
+        <input type="file" id="pr-fisier">
+      </div>
+      <div class="form-group">
+        <label for="pr-data">Data Propunerii</label>
         <input type="date" id="pr-data">
       </div>
       <div class="form-group">
@@ -262,6 +266,9 @@
           <option value="mica">Mică</option>
           <option value="mare">Mare</option>
         </select>
+      </div>
+      <div id="impact-preview" style="margin-top: 15px; font-weight: bold;">
+        Scor impact: -
       </div>
       <button type="submit">Depune Proiect</button>
     </form>
