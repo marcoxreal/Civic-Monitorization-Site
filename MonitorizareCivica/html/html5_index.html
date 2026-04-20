@@ -74,7 +74,7 @@
       table { width: 100%; border-collapse: collapse; margin-top: 15px; }
       th { background-color: var(--dark-slate); color: white; padding: 12px; text-align: left; }
       th.sortable { cursor: pointer; position: relative; }
-      th.sortable:after { content: ' ↕'; font-size: 0.8em; opacity: 0.5; }
+      /*th.sortable:after { content: ' ↕'; font-size: 0.8em; opacity: 0.5; }*/
       td { padding: 12px; border-bottom: 1px solid #eee; }
       tr:hover { background-color: #fcfcfc; }
 
@@ -139,9 +139,15 @@
     <table id="tabel-proiecte">
       <thead>
       <tr>
-        <th class="sortable" onclick="sortTable(0)">ID</th>
-        <th class="sortable" onclick="sortTable(1)">Titlu</th>
-        <th class="sortable" onclick="sortTable(2)">Voturi</th>
+        <th class="sortable" onclick="sortTable(0)">
+          ID <span id="sort-icon-0"></span>
+        </th>
+        <th class="sortable" onclick="sortTable(1)">
+          Titlu <span id="sort-icon-1"></span>
+        </th>
+        <th class="sortable" onclick="sortTable(2)">
+          Voturi <span id="sort-icon-2"></span>
+        </th>
       </tr>
       </thead>
       <tbody id="body-tabel">

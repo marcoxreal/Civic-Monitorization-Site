@@ -33,6 +33,7 @@ function sortTable(colIndex) {
   const table = document.getElementById('tabel-proiecte');
   const headers = table.querySelectorAll('th');
   let rows = Array.from(table.rows).slice(1);
+
   let isAsc = !headers[colIndex].classList.contains('sorted-asc');
 
   rows.sort((a, b) => {
@@ -43,12 +44,24 @@ function sortTable(colIndex) {
       : valB.localeCompare(valA, undefined, { numeric: true });
   });
 
-  headers.forEach((h) => h.classList.remove('sorted-asc', 'sorted-desc'));
-  headers[colIndex].classList.add(isAsc ? 'sorted-asc' : 'sorted-desc');
+  headers.forEach((h, index) => {
+    h.classList.remove('sorted-asc', 'sorted-desc');
+    const icon = document.getElementById(`sort-icon-${index}`);
+    if (icon) icon.innerText = '↕';
+  });
 
+  const currentIcon = document.getElementById(`sort-icon-${colIndex}`);
+  if (isAsc) {
+    headers[colIndex].classList.add('sorted-asc');
+    if (currentIcon) currentIcon.innerText = '▲';
+  } else {
+    headers[colIndex].classList.add('sorted-desc');
+    if (currentIcon) currentIcon.innerText = '▼';
+  }
+
+  // Reatașăm rândurile sortate
   rows.forEach((row) => table.tBodies[0].appendChild(row));
 }
-
 // LISTE COLAPSABILE
 function initCollapsible() {
   const items = document.querySelectorAll('.collapsible-item');
@@ -76,14 +89,14 @@ function populateVerticalTable() {
   const table = document.getElementById('tabel-vertical');
   if (!table) return;
 
-  // Curățăm datele vechi dacă există (păstrăm doar primul TH de pe fiecare rând)
+  // curatam datele vechi daca exista
   Array.from(table.rows).forEach((row) => {
     while (row.cells.length > 1) {
       row.deleteCell(1);
     }
   });
 
-  // Adăugăm datele din variabila globală dateProiecte (din date_dependente.js)
+  // adaugam datele din variabila globale dateProiecte
   dateProiecte.forEach((p) => {
     table.rows[0].insertCell(-1).innerText = p.id;
     table.rows[1].insertCell(-1).innerText = p.titlu;
@@ -92,40 +105,47 @@ function populateVerticalTable() {
   });
 }
 
-// --- SORTARE TABEL VERTICAL ---
 function sortVertical(rowIndex) {
   const table = document.getElementById('tabel-vertical');
-  const rows = Array.from(table.rows);
-  const headerCell = rows[rowIndex].cells[0];
+  if (!table) return;
 
-  // Toggle între asc/desc folosind o clasă
+  const rows = Array.from(table.rows);
+  const headerCell = rows[rowIndex].cells[0]; // Celula TH pe care s-a dat click
+
   const isAsc = !headerCell.classList.contains('sorted-asc');
 
-  // 1. Extragem coloanele ca array-uri de date
+  // extragem date din coloane
   let columns = [];
-  const numDataCols = rows[0].cells.length - 1;
+  const numDataCols = rows[0].cells.length - 1; // cate coloane de date avem
 
   for (let j = 1; j <= numDataCols; j++) {
-    let col = rows.map((row) => row.cells[j].innerText);
+    let col = [];
+    for (let i = 0; i < rows.length; i++) {
+      col.push(rows[i].cells[j].innerText);
+    }
     columns.push(col);
   }
 
-  // 2. Sortăm array-ul de coloane în funcție de valoarea de pe rândul rowIndex
   columns.sort((a, b) => {
     let valA = a[rowIndex];
     let valB = b[rowIndex];
 
-    // Sortare numerică dacă e cazul, altfel alfabetică
-    return isAsc
-      ? valA.localeCompare(valB, undefined, { numeric: true })
-      : valB.localeCompare(valA, undefined, { numeric: true });
+    // Folosim localeCompare cu numeric:true pentru a trata corect numerele
+    if (isAsc) {
+      return valA.localeCompare(valB, undefined, { numeric: true });
+    } else {
+      return valB.localeCompare(valA, undefined, { numeric: true });
+    }
   });
 
-  // 3. Update vizual header
-  rows.forEach((r) => r.cells[0].classList.remove('sorted-asc', 'sorted-desc'));
+  // GESTIONAREA VIZUALA A SAGETILOR
+  rows.forEach((r) => {
+    const th = r.cells[0];
+    if (th) th.classList.remove('sorted-asc', 'sorted-desc');
+  });
+
   headerCell.classList.add(isAsc ? 'sorted-asc' : 'sorted-desc');
 
-  // 4. Scriem datele înapoi în tabel
   rows.forEach((row, rIdx) => {
     columns.forEach((colData, cIdx) => {
       row.cells[cIdx + 1].innerText = colData[rIdx];

@@ -1,7 +1,6 @@
-// javascript/logica_validare.js
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Funcție generică pentru a marca eroarea
+  // functie generica pt a marca eroarea
   function marcheazaEroare(element, conditie) {
     if (conditie) {
       element.style.border = '2px solid red';
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const subiect = document.getElementById('c-subiect');
       const mesaj = document.getElementById('c-mesaj');
 
-      // Validare subiect (să nu fie gol)
+      // Validare subiect (sa nu fie gol)
       if (!marcheazaEroare(subiect, subiect.value.trim() === '')) {
         esteValid = false;
       }
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }
 
-  // --- Validare Formular Proiect ---
+  //  Validare Formular Proiect
   const formProiect = document.getElementById('form-proiect');
   if (formProiect) {
     formProiect.onsubmit = function (e) {
@@ -80,12 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
         esteValid = false;
       }
 
-      // Validare dată (să fie selectată)
+      // Validare data (sa fie selectata)
       if (!marcheazaEroare(dataProiect, dataProiect.value === '')) {
         esteValid = false;
       }
 
-      // Validare prioritate (să fie selectată o opțiune cu valoare)
+      // Validare prioritate (sa fie selectata)
       if (!marcheazaEroare(prioritate, prioritate.value === '')) {
         esteValid = false;
       }
