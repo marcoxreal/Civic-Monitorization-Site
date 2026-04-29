@@ -1,98 +1,61 @@
+$(document).ready(function () {
+  // functie helper pt erori
+  function marcheazaEroare($el, conditie) {
+    $el.css('border', conditie ? '2px solid red' : '1px solid #ccc');
+    return !conditie;
+  }
 
-document.addEventListener('DOMContentLoaded', function () {
-  // functie generica pt a marca eroarea
-  function marcheazaEroare(element, conditie) {
-    if (conditie) {
-      element.style.border = '2px solid red';
-      return false;
-    } else {
-      element.style.border = '1px solid #ccc';
-      return true;
+  // Validare Formular Profil
+  $('#form-profil').on('submit', function (e) {
+    let v1 = marcheazaEroare(
+      $('#p-nume'),
+      $('#p-nume').val().length < 3 || /\d/.test($('#p-nume').val()),
+    );
+    let v2 = marcheazaEroare($('#p-email'), !$('#p-email').val().includes('@'));
+    let v3 = marcheazaEroare($('#p-parola'), $('#p-parola').val().length < 8);
+
+    if (!(v1 && v2 && v3)) {
+      e.preventDefault();
+      alert('Corectați profilul!');
     }
-  }
+  });
 
-  // --- Validare Formular Profil ---
-  const formProfil = document.getElementById('form-profil');
-  if (formProfil) {
-    formProfil.onsubmit = function (e) {
-      let esteValid = true;
+  // Validare Formular Proiect
+  $('#form-proiect').on('submit', function (e) {
+    let v1 = marcheazaEroare(
+      $('#pr-titlu'),
+      $.trim($('#pr-titlu').val()) === '',
+    );
+    let v2 = marcheazaEroare($('#pr-data'), $('#pr-data').val() === '');
+    let v3 = marcheazaEroare(
+      $('#pr-prioritate'),
+      $('#pr-prioritate').val() === '',
+    );
 
-      const nume = document.getElementById('p-nume');
-      const email = document.getElementById('p-email');
-      const parola = document.getElementById('p-parola');
+    if (!(v1 && v2 && v3)) {
+      e.preventDefault();
+      alert('Toate câmpurile sunt obligatorii!');
+    }
+  });
 
-      if (
-        !marcheazaEroare(nume, nume.value.length < 3 || /\d/.test(nume.value))
-      )
-        esteValid = false;
+  // Validare Formular Contact
+  $('#form-contact').on('submit', function (e) {
+    let esteValid = true;
+    const $subiect = $('#c-subiect');
+    const $mesaj = $('#c-mesaj');
 
-      if (!marcheazaEroare(email, !email.value.includes('@')))
-        esteValid = false;
+    if (!marcheazaEroare($subiect, $.trim($subiect.val()) === '')) {
+      esteValid = false;
+    }
+    if (!marcheazaEroare($mesaj, $mesaj.val().length < 10)) {
+      esteValid = false;
+    }
 
-      if (!marcheazaEroare(parola, parola.value.length < 8)) esteValid = false;
-
-      if (!esteValid) {
-        e.preventDefault();
-        alert('Corectați câmpurile marcate cu roșu în profil!');
-      }
-    };
-  }
-
-  // --- Validare Formular Contact ---
-  const formContact = document.getElementById('form-contact');
-  if (formContact) {
-    formContact.onsubmit = function (e) {
-      let esteValid = true;
-      const subiect = document.getElementById('c-subiect');
-      const mesaj = document.getElementById('c-mesaj');
-
-      // Validare subiect (sa nu fie gol)
-      if (!marcheazaEroare(subiect, subiect.value.trim() === '')) {
-        esteValid = false;
-      }
-
-      // Validare mesaj (minim 10 caractere)
-      if (!marcheazaEroare(mesaj, mesaj.value.length < 10)) {
-        esteValid = false;
-      }
-
-      if (!esteValid) {
-        e.preventDefault();
-        alert(
-          'Te rugăm să completezi subiectul și un mesaj de minim 10 caractere.',
-        );
-      }
-    };
-  }
-
-  //  Validare Formular Proiect
-  const formProiect = document.getElementById('form-proiect');
-  if (formProiect) {
-    formProiect.onsubmit = function (e) {
-      let esteValid = true;
-      const titlu = document.getElementById('pr-titlu');
-      const dataProiect = document.getElementById('pr-data');
-      const prioritate = document.getElementById('pr-prioritate');
-
-      // Validare titlu
-      if (!marcheazaEroare(titlu, titlu.value.trim() === '')) {
-        esteValid = false;
-      }
-
-      // Validare data (sa fie selectata)
-      if (!marcheazaEroare(dataProiect, dataProiect.value === '')) {
-        esteValid = false;
-      }
-
-      // Validare prioritate (sa fie selectata)
-      if (!marcheazaEroare(prioritate, prioritate.value === '')) {
-        esteValid = false;
-      }
-
-      if (!esteValid) {
-        e.preventDefault();
-        alert('Toate câmpurile sunt obligatorii: Titlu, Dată și Prioritate.');
-      }
-    };
-  }
+    if (!esteValid) {
+      e.preventDefault();
+      alert(
+        'Te rugăm să completezi subiectul și un mesaj de minim 10 caractere.',
+      );
+    }
+  });
 });

@@ -1,24 +1,17 @@
+$(document).ready(function () {
+  $('#select-partid').on('change', function () {
+    const partid = $(this).val();
+    const $membru = $('#select-membru');
 
-document.addEventListener('DOMContentLoaded', function () {
-  const selectPartid = document.getElementById('select-partid');
-  const selectMembru = document.getElementById('select-membru');
+    $membru.html('<option value="">-- Alege membrul --</option>');
 
-  if (selectPartid && selectMembru) {
-    selectPartid.addEventListener('change', function () {
-      const partid = this.value;
-      selectMembru.innerHTML = '<option value="">-- Alege membrul --</option>';
-
-      if (partid === '') {
-        selectMembru.disabled = true;
-      } else {
-        selectMembru.disabled = false;
-        datePartide[partid].forEach((nume) => {
-          const opt = document.createElement('option');
-          opt.value = nume;
-          opt.textContent = nume;
-          selectMembru.appendChild(opt);
-        });
-      }
-    });
-  }
+    if (!partid) {
+      $membru.prop('disabled', true);
+    } else {
+      $membru.prop('disabled', false);
+      $.each(datePartide[partid], function (i, nume) {
+        $membru.append($('<option>', { value: nume, text: nume }));
+      });
+    }
+  });
 });

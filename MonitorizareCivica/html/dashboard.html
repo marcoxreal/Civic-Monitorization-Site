@@ -51,27 +51,26 @@
 
   <section class="table-section">
     <h2>Tabel Vertical</h2>
-    <p><small>* Click pe celulele albastre pentru a sorta coloanele de proiecte.</small></p>
-
     <div class="table-container">
       <table id="tabel-vertical">
         <tr>
-          <th class="sortable" onclick="sortVertical(0)">ID Proiect</th>
+          <th class="sortable" onclick="sortVertical(0)">ID Proiect <span id="v-icon-0"></span></th>
         </tr>
         <tr>
-          <th class="sortable" onclick="sortVertical(1)">Titlu</th>
+          <th class="sortable" onclick="sortVertical(1)">Titlu <span id="v-icon-1"></span></th>
         </tr>
         <tr>
-          <th class="sortable" onclick="sortVertical(2)">Voturi</th>
+          <th class="sortable" onclick="sortVertical(2)">Voturi <span id="v-icon-2"></span></th>
         </tr>
         <tr>
-          <th class="sortable" onclick="sortVertical(3)">Buget (€)</th>
+          <th class="sortable" onclick="sortVertical(3)">Buget (€) <span id="v-icon-3"></span></th>
         </tr>
       </table>
     </div>
   </section>
 </main>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../javascript/date_dependente.js"></script>
 <script src="../javascript/logica_laborator.js"></script>
 

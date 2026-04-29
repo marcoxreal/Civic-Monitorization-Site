@@ -1,209 +1,155 @@
-// CAROUSEL
-let currentSlide = 0;
+$(document).ready(function () {
+  // CAROUSEL
+  let currentSlide = 0;
 
-function updateCarousel() {
-  const img = document.getElementById('carousel-img');
-  if (!img) return;
-  const item = dateCarousel[currentSlide];
-  img.src = item.img;
-  document.getElementById('carousel-link').href = item.link;
-  document.getElementById('carousel-caption').innerText = item.text;
-}
+  function updateCarousel() {
+    const $img = $('#carousel-img');
+    if ($img.length === 0) return;
 
-function moveSlide(step) {
-  currentSlide =
-    (currentSlide + step + dateCarousel.length) % dateCarousel.length;
-  updateCarousel();
-}
-
-// Auto-play la 3 secunde
-setInterval(() => moveSlide(1), 3000);
-
-// TABEL SORTABIL
-function populateTable() {
-  const body = document.getElementById('body-tabel');
-  body.innerHTML = '';
-  dateProiecte.forEach((p) => {
-    let row = `<tr><td>${p.id}</td><td>${p.titlu}</td><td>${p.voturi}</td></tr>`;
-    body.innerHTML += row;
-  });
-}
-
-function sortTable(colIndex) {
-  const table = document.getElementById('tabel-proiecte');
-  const headers = table.querySelectorAll('th');
-  let rows = Array.from(table.rows).slice(1);
-
-  let isAsc = !headers[colIndex].classList.contains('sorted-asc');
-
-  rows.sort((a, b) => {
-    let valA = a.cells[colIndex].innerText;
-    let valB = b.cells[colIndex].innerText;
-    return isAsc
-      ? valA.localeCompare(valB, undefined, { numeric: true })
-      : valB.localeCompare(valA, undefined, { numeric: true });
-  });
-
-  headers.forEach((h, index) => {
-    h.classList.remove('sorted-asc', 'sorted-desc');
-    const icon = document.getElementById(`sort-icon-${index}`);
-    if (icon) icon.innerText = '↕';
-  });
-
-  const currentIcon = document.getElementById(`sort-icon-${colIndex}`);
-  if (isAsc) {
-    headers[colIndex].classList.add('sorted-asc');
-    if (currentIcon) currentIcon.innerText = '▲';
-  } else {
-    headers[colIndex].classList.add('sorted-desc');
-    if (currentIcon) currentIcon.innerText = '▼';
+    const item = dateCarousel[currentSlide];
+    $img.attr('src', item.img);
+    $('#carousel-link').attr('href', item.link);
+    $('#carousel-caption').text(item.text);
   }
 
-  // Reatașăm rândurile sortate
-  rows.forEach((row) => table.tBodies[0].appendChild(row));
-}
-// LISTE COLAPSABILE
-function initCollapsible() {
-  const items = document.querySelectorAll('.collapsible-item');
-  items.forEach((item) => {
-    item.addEventListener('click', function () {
-      const sublist = this.nextElementSibling;
-      sublist.classList.toggle('hidden');
-      this.classList.toggle('collapsed');
-    });
-  });
-}
-
-// Dark Mode Automat
-// schimba tema in functie de ora utilizatorului
-function checkCreativeTheme() {
-  const ora = new Date().getHours();
-  if (ora < 8 || ora > 20) {
-    document.body.style.filter = 'invert(0.9) hue-rotate(180deg)';
-    console.log('Mod de Noapte Activ (Creativ)');
-  }
-}
-
-// --- POPULARE TABEL VERTICAL ---
-function populateVerticalTable() {
-  const table = document.getElementById('tabel-vertical');
-  if (!table) return;
-
-  // curatam datele vechi daca exista
-  Array.from(table.rows).forEach((row) => {
-    while (row.cells.length > 1) {
-      row.deleteCell(1);
-    }
-  });
-
-  // adaugam datele din variabila globale dateProiecte
-  dateProiecte.forEach((p) => {
-    table.rows[0].insertCell(-1).innerText = p.id;
-    table.rows[1].insertCell(-1).innerText = p.titlu;
-    table.rows[2].insertCell(-1).innerText = p.voturi;
-    table.rows[3].insertCell(-1).innerText = p.buget;
-  });
-}
-
-function sortVertical(rowIndex) {
-  const table = document.getElementById('tabel-vertical');
-  if (!table) return;
-
-  const rows = Array.from(table.rows);
-  const headerCell = rows[rowIndex].cells[0]; // Celula TH pe care s-a dat click
-
-  const isAsc = !headerCell.classList.contains('sorted-asc');
-
-  // extragem date din coloane
-  let columns = [];
-  const numDataCols = rows[0].cells.length - 1; // cate coloane de date avem
-
-  for (let j = 1; j <= numDataCols; j++) {
-    let col = [];
-    for (let i = 0; i < rows.length; i++) {
-      col.push(rows[i].cells[j].innerText);
-    }
-    columns.push(col);
-  }
-
-  columns.sort((a, b) => {
-    let valA = a[rowIndex];
-    let valB = b[rowIndex];
-
-    // Folosim localeCompare cu numeric:true pentru a trata corect numerele
-    if (isAsc) {
-      return valA.localeCompare(valB, undefined, { numeric: true });
-    } else {
-      return valB.localeCompare(valA, undefined, { numeric: true });
-    }
-  });
-
-  // GESTIONAREA VIZUALA A SAGETILOR
-  rows.forEach((r) => {
-    const th = r.cells[0];
-    if (th) th.classList.remove('sorted-asc', 'sorted-desc');
-  });
-
-  headerCell.classList.add(isAsc ? 'sorted-asc' : 'sorted-desc');
-
-  rows.forEach((row, rIdx) => {
-    columns.forEach((colData, cIdx) => {
-      row.cells[cIdx + 1].innerText = colData[rIdx];
-    });
-  });
-}
-
-// initializare tot la incarcare
-window.onload = function () {
-  if (typeof dateCarousel !== 'undefined') {
+  // atasam evenimente butoanelor
+  window.moveSlide = function (step) {
+    currentSlide =
+      (currentSlide + step + dateCarousel.length) % dateCarousel.length;
     updateCarousel();
+  };
+
+  if (typeof dateCarousel !== 'undefined') updateCarousel();
+  setInterval(() => moveSlide(1), 3000);
+
+  // TABEL ORIZONTAL (Populare)
+  function populateTable() {
+    const $body = $('#body-tabel');
+    $body.empty(); // Curățăm corpul tabelului
+
+    $.each(dateProiecte, function (i, p) {
+      const row = `<tr><td>${p.id}</td><td>${p.titlu}</td><td>${p.voturi}</td></tr>`;
+      $body.append(row);
+    });
   }
-  if (document.getElementById('body-tabel')) {
-    populateTable();
+
+  // TABEL ORIZONTAL (Sortare)
+  window.sortTable = function (colIndex) {
+    const $table = $('#tabel-proiecte');
+    const $headers = $table.find('th');
+    const $rows = $table.find('tbody tr').get();
+    const isAsc = !$headers.eq(colIndex).hasClass('sorted-asc');
+
+    $rows.sort(function (a, b) {
+      const valA = $(a).children('td').eq(colIndex).text();
+      const valB = $(b).children('td').eq(colIndex).text();
+      return isAsc
+        ? $.isNumeric(valA)
+          ? valA - valB
+          : valA.localeCompare(valB)
+        : $.isNumeric(valA)
+          ? valB - valA
+          : valB.localeCompare(valA);
+    });
+
+    // Update vizual iconite
+    $headers.removeClass('sorted-asc sorted-desc').find('span').text('↕');
+    $headers
+      .eq(colIndex)
+      .addClass(isAsc ? 'sorted-asc' : 'sorted-desc')
+      .find('span')
+      .text(isAsc ? '▲' : '▼');
+
+    $.each($rows, function (i, row) {
+      $table.children('tbody').append(row);
+    });
+  };
+
+  // TABEL VERTICAL (Populare & Sortare)
+  function populateVerticalTable() {
+    const $table = $('#tabel-vertical');
+    if ($table.length === 0) return;
+
+    $table.find('tr').each(function () {
+      $(this).find('td').remove(); // Ștergem celulele de date vechi
+    });
+
+    $.each(dateProiecte, function (i, p) {
+      $table.find('tr').eq(0).append(`<td>${p.id}</td>`);
+      $table.find('tr').eq(1).append(`<td>${p.titlu}</td>`);
+      $table.find('tr').eq(2).append(`<td>${p.voturi}</td>`);
+      $table.find('tr').eq(3).append(`<td>${p.buget}</td>`);
+    });
   }
-  if (document.getElementById('tabel-vertical')) {
-    populateVerticalTable();
-  }
-  initCollapsible();
-  checkCreativeTheme();
-};
 
+  window.sortVertical = function (rowIndex) {
+    const $table = $('#tabel-vertical');
+    const $rows = $table.find('tr');
+    const isAsc = !$rows.eq(rowIndex).find('th').hasClass('sorted-asc');
 
-// scor impact automat
-const titluInput = document.getElementById('pr-titlu');
-const prioritateSelect = document.getElementById('pr-prioritate');
-const fisierInput = document.getElementById('pr-fisier');
-const preview = document.getElementById('impact-preview');
+    let columns = [];
+    const numDataCols = $rows.first().find('td').length;
 
-function calculeazaImpact() {
-  let scor = 0;
+    for (let j = 0; j < numDataCols; j++) {
+      let col = $rows
+        .map(function () {
+          return $(this).find('td').eq(j).text();
+        })
+        .get();
+      columns.push(col);
+    }
 
-  // prioritate
-  const prioritate = prioritateSelect.value;
-  if (prioritate === 'mare') scor += 40;
-  else if (prioritate === 'mica') scor += 20;
+    columns.sort((a, b) =>
+      isAsc
+        ? a[rowIndex].localeCompare(b[rowIndex], undefined, { numeric: true })
+        : b[rowIndex].localeCompare(a[rowIndex], undefined, { numeric: true }),
+    );
 
-  // lungime titlu
-  const titluLength = titluInput.value.length;
-  if (titluLength > 20) scor += 30;
-  else if (titluLength > 10) scor += 15;
+    $rows.find('th').removeClass('sorted-asc sorted-desc');
+    $rows
+      .eq(rowIndex)
+      .find('th')
+      .addClass(isAsc ? 'sorted-asc' : 'sorted-desc');
 
-  // fisier atasat
-  if (fisierInput.files.length > 0) scor += 30;
+    $rows.each(function (rIdx) {
+      const $currentRow = $(this);
+      $.each(columns, function (cIdx, colData) {
+        $currentRow.find('td').eq(cIdx).text(colData[rIdx]);
+      });
+    });
+  };
 
-  // limitare
-  if (scor > 100) scor = 100;
+  // LISTE COLAPSABILE
+  $('.collapsible-item').on('click', function () {
+    $(this).toggleClass('collapsed').next('.nested-list').slideToggle();
+  });
 
-  // interpretare
-  let mesaj = '';
-  if (scor < 30) mesaj = 'Impact scăzut';
-  else if (scor < 70) mesaj = 'Impact mediu';
-  else mesaj = 'Impact ridicat';
+  // SCOR IMPACT AUTOMAT
+  $('#pr-titlu, #pr-prioritate, #pr-fisier').on('input change', function () {
+    let scor = 0;
+    const titlu = $('#pr-titlu').val();
+    const prioritate = $('#pr-prioritate').val();
+    const areFisier = $('#pr-fisier')[0].files.length > 0;
 
-  preview.textContent = `Scor impact: ${scor} (${mesaj})`;
-}
+    if (prioritate === 'mare') scor += 40;
+    else if (prioritate === 'mica') scor += 20;
 
-// event listeners
-titluInput.addEventListener('input', calculeazaImpact);
-prioritateSelect.addEventListener('change', calculeazaImpact);
-fisierInput.addEventListener('change', calculeazaImpact);
+    if (titlu.length > 20) scor += 30;
+    else if (titlu.length > 10) scor += 15;
+
+    if (areFisier) scor += 30;
+
+    scor = Math.min(scor, 100);
+    let mesaj =
+      scor < 30
+        ? 'Impact scăzut'
+        : scor < 70
+          ? 'Impact mediu'
+          : 'Impact ridicat';
+    $('#impact-preview').text(`Scor impact: ${scor} (${mesaj})`);
+  });
+
+  // executare initiala
+  if ($('#body-tabel').length) populateTable();
+  if ($('#tabel-vertical').length) populateVerticalTable();
+});

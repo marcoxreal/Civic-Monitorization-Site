@@ -1,59 +1,50 @@
-window.onload = function () {
-  const selJudet = document.getElementById('select-judet');
-  const selLocalitate = document.getElementById('select-localitate');
+$(document).ready(function () {
+  // logica judet -> localitate
+  $('#select-judet').on('change', function () {
+    const judet = $(this).val();
+    const $localitate = $('#select-localitate');
 
-  if (selJudet && selLocalitate) {
-    selJudet.addEventListener('change', function () {
-      const judet = this.value;
-      selLocalitate.innerHTML =
-        '<option value="">-- Alege localitatea --</option>';
+    $localitate.html('<option value="">-- Alege localitatea --</option>');
 
-      if (judet && dateLocatii[judet]) {
-        selLocalitate.disabled = false;
-        dateLocatii[judet].forEach((loc) => {
-          let opt = document.createElement('option');
-          opt.value = loc;
-          opt.textContent = loc;
-          selLocalitate.appendChild(opt);
-        });
-      } else {
-        selLocalitate.disabled = true;
-      }
-    });
-  }
+    if (judet && dateLocatii[judet]) {
+      $localitate.prop('disabled', false);
+      $.each(dateLocatii[judet], function (i, loc) {
+        $localitate.append($('<option>', { value: loc, text: loc }));
+      });
+    } else {
+      $localitate.prop('disabled', true);
+    }
+  });
 
-  const inVarsta = document.getElementById('input-varsta-profil');
-  const inData = document.getElementById('input-data-nastere');
-  const helper = document.getElementById('v-helper');
+  // logica varsta -> an nastere
+  $('#input-varsta-profil').on('input', function () {
+    const v = parseInt($(this).val());
+    const $inData = $('#input-data-nastere');
+    const $helper = $('#v-helper');
 
-  if (inVarsta && inData) {
-    inVarsta.addEventListener('input', function() {
-      const v = parseInt(this.value);
+    if (v >= 18 && v <= 100) {
+      const anCurent = new Date().getFullYear();
+      const anMinim = anCurent - v - 1;
+      const anMaxim = anCurent - v;
 
-      if (v >= 18 && v <= 100) {
-        const dataCurenta = new Date();
-        const anCurent = dataCurenta.getFullYear();
+      // setam limitele calendarului folosind .attr()
+      $inData.attr('min', `${anMinim}-01-01`);
+      $inData.attr('max', `${anMaxim}-12-31`);
 
-        const anMinim = anCurent - v - 1;
-        const anMaxim = anCurent - v;
+      $helper
+        .text(`Ani posibili: ${anMinim} sau ${anMaxim}`)
+        .css('color', 'green');
 
-        inData.min = `${anMinim}-01-01`;
-        inData.max = `${anMaxim}-12-31`;
-
-        helper.textContent = `Ani posibili: ${anMinim} sau ${anMaxim}`;
-        helper.style.color = "green";
-
-        if (inData.value) {
-          const anSelectat = new Date(inData.value).getFullYear();
-          if (anSelectat < anMinim || anSelectat > anMaxim) {
-            inData.value = "";
-          }
+      // verificam daca data deja selectata mai e valida
+      if ($inData.val()) {
+        const anSelectat = new Date($inData.val()).getFullYear();
+        if (anSelectat < anMinim || anSelectat > anMaxim) {
+          $inData.val('');
         }
-      } else {
-        inData.min = "";
-        inData.max = "";
-        helper.textContent = "Vârstă nepermisă (min 18 ani).";
-        helper.style.color = "red";
       }
-    });
-  }}
+    } else {
+      $inData.removeAttr('min max');
+      $helper.text('Vârstă nepermisă (min 18 ani).').css('color', 'red');
+    }
+  });
+});
