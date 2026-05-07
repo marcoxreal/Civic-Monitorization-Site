@@ -68,6 +68,43 @@
       </table>
     </div>
   </section>
+
+  <section class="table-section">
+    <h2>Tabel Proiecte (Orizontal)</h2>
+    <div class="table-container">
+      <table id="tabel-proiecte">
+        <thead>
+          <tr>
+            <th class="sortable" onclick="sortTable('tabel-proiecte', 0)">ID Proiect <span id="p-icon-0"></span></th>
+            <th class="sortable" onclick="sortTable('tabel-proiecte', 1)">Titlu <span id="p-icon-1"></span></th>
+            <th class="sortable" onclick="sortTable('tabel-proiecte', 2)">Voturi <span id="p-icon-2"></span></th>
+            <th class="sortable" onclick="sortTable('tabel-proiecte', 3)">Buget (€) <span id="p-icon-3"></span></th>
+          </tr>
+        </thead>
+        <tbody id="body-tabel-proiecte">
+          <!-- Data will be populated here by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="table-section">
+    <h2>Tabel Evenimente (Orizontal)</h2>
+    <div class="table-container">
+      <table id="tabel-evenimente">
+        <thead>
+          <tr>
+            <th class="sortable" onclick="sortTable('tabel-evenimente', 0)">ID Eveniment <span id="e-icon-0"></span></th>
+            <th class="sortable" onclick="sortTable('tabel-evenimente', 1)">Nume Eveniment <span id="e-icon-1"></span></th>
+            <th class="sortable" onclick="sortTable('tabel-evenimente', 2)">Data <span id="e-icon-2"></span></th>
+            <th class="sortable" onclick="sortTable('tabel-evenimente', 3)">Participanți <span id="e-icon-3"></span></th>
+          </tr>
+        </thead>
+        <tbody id="body-tabel-evenimente">
+        </tbody>
+      </table>
+    </div>
+  </section>
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

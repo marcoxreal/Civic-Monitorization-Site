@@ -22,20 +22,20 @@ $(document).ready(function () {
   if (typeof dateCarousel !== 'undefined') updateCarousel();
   setInterval(() => moveSlide(1), 3000);
 
-  // TABEL ORIZONTAL (Populare)
-  function populateTable() {
-    const $body = $('#body-tabel');
-    $body.empty(); // Curățăm corpul tabelului
+  // TABEL ORIZONTAL PROIECTE (Populare)
+  function populateTableProiecte() {
+    const $body = $('#body-tabel-proiecte');
+    $body.empty();
 
     $.each(dateProiecte, function (i, p) {
-      const row = `<tr><td>${p.id}</td><td>${p.titlu}</td><td>${p.voturi}</td></tr>`;
+      const row = `<tr><td>${p.id}</td><td>${p.titlu}</td><td>${p.voturi}</td><td>${p.buget}</td></tr>`; // Added buget
       $body.append(row);
     });
   }
 
   // TABEL ORIZONTAL (Sortare)
-  window.sortTable = function (colIndex) {
-    const $table = $('#tabel-proiecte');
+  window.sortTable = function (tableId, colIndex) {
+    const $table = $(`#${tableId}`);
     const $headers = $table.find('th');
     const $rows = $table.find('tbody tr').get();
     const isAsc = !$headers.eq(colIndex).hasClass('sorted-asc');
@@ -43,6 +43,13 @@ $(document).ready(function () {
     $rows.sort(function (a, b) {
       const valA = $(a).children('td').eq(colIndex).text();
       const valB = $(b).children('td').eq(colIndex).text();
+
+      if (tableId === 'tabel-evenimente' && colIndex === 2) {
+        const dateA = new Date(valA);
+        const dateB = new Date(valB);
+        return isAsc ? dateA - dateB : dateB - dateA;
+      }
+
       return isAsc
         ? $.isNumeric(valA)
           ? valA - valB
@@ -119,6 +126,17 @@ $(document).ready(function () {
     });
   };
 
+  // TABEL EVENIMENTE (Populare)
+  function populateTableEvenimente() {
+    const $body = $('#body-tabel-evenimente');
+    $body.empty(); // Curățăm corpul tabelului
+
+    $.each(dateEvenimente, function (i, e) {
+      const row = `<tr><td>${e.id}</td><td>${e.nume}</td><td>${e.data}</td><td>${e.participanti}</td></tr>`;
+      $body.append(row);
+    });
+  }
+
   // LISTE COLAPSABILE
   $('.collapsible-item').on('click', function () {
     $(this).toggleClass('collapsed').next('.nested-list').slideToggle();
@@ -150,6 +168,7 @@ $(document).ready(function () {
   });
 
   // executare initiala
-  if ($('#body-tabel').length) populateTable();
+  if ($('#body-tabel-proiecte').length) populateTableProiecte(); // Changed ID
   if ($('#tabel-vertical').length) populateVerticalTable();
+  if ($('#body-tabel-evenimente').length) populateTableEvenimente();
 });
